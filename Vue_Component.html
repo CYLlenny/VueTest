@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue_Component</title>
+
+    <!--Bootstrap jquery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--Vue-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+    <script>
+
+    var json = {
+        items:["Eric","Amy","Bob"]
+    }
+
+    function DefineComponent(){
+        Vue.component('my-component',{
+            template:'<div><label>欄位名稱</label><br /><input class="form-control" type="text" value="123" /> <br /><br /></div>'
+        })
+
+        Vue.component('my-component2',{
+            props: ['item'],
+            template:'#component2'
+        })
+    }
+    
+    function Binding(){
+        vm = new Vue({
+            el:"#block1",
+            data:json
+        })
+    }
+
+    $(document).ready(function(){
+        DefineComponent();
+        Binding();
+    })
+
+    </script>
+
+</head>
+
+<body>
+    <div id="block1" class="container" style="margin: 10px">
+        <h1>Vue_Component Test</h1>
+        <my-component></my-component>
+        <my-component></my-component>
+        
+        <my-component2 v-for="item in items" v-bind:item="item"></my-component2>
+        
+    </div>
+</body>
+
+<template id="component2">
+        <div>
+            <label>模板  姓名:{{item}}</label><br />
+            <input class="form-control" type="text" v-bind:value="item" /> 
+            <br /><br />
+        </div>
+</template>
+
+</html>
